@@ -1,9 +1,13 @@
 package com.example.luoxiaozhuo.myapplication.bean;
 
-import java.io.Serializable;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+@Entity(tableName = "user")
 public class User implements Serializable {
     private String login;
+    @PrimaryKey
     private int id;
     private String avatar_url;
     private String gravatar_id;
