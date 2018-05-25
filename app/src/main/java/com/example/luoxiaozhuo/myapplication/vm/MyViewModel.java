@@ -9,10 +9,9 @@ public class MyViewModel extends ViewModel {
 
 
     public final ReplyCommand onMoreCommand = new ReplyCommand(()->{
-        new Thread (() ->{
 
-        }).start();
     });
+
 
 
 }
