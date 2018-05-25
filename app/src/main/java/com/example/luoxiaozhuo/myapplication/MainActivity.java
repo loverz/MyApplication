@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.luoxiaozhuo.myapplication.fg.MainFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -20,8 +22,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_dashboard: {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, MainFragment.newInstance())
+                            .commitNow();
+                }
+
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications + " hello world! test for git") ;

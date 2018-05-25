@@ -11,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.luoxiaozhuo.myapplication.R;
+import com.example.luoxiaozhuo.myapplication.bean.UserBean;
 import com.example.luoxiaozhuo.myapplication.ld.MyLiveViewData;
 import com.example.luoxiaozhuo.myapplication.ld.OnValueChangeListener;
 import com.example.luoxiaozhuo.myapplication.vm.MyViewModel;
 
 public class MainFragment extends Fragment {
+
+    public static MainFragment instance;
 
     MyViewModel myViewModel;
 
@@ -27,7 +30,12 @@ public class MainFragment extends Fragment {
 
     MyLiveViewData mData;
    public static MainFragment newInstance(){
-       return new MainFragment();
+
+       if(instance == null) {
+           instance = new MainFragment();
+       }
+
+       return instance;
    }
 
     @Nullable
@@ -49,5 +57,17 @@ public class MainFragment extends Fragment {
 
         mData.observer(onValueChangeBtnOberser);
 
+        myViewModel.getUser().observe(this,(userBean -> {
+            updateView(userBean);
+        }));
+
+        mBtn.setOnClickListener(((view) -> {
+            myViewModel.setUser("test2222",1);
+        }));
+
+    }
+
+    private void updateView(UserBean userBean) {
+       mBtn.setText(userBean.name);
     }
 }
