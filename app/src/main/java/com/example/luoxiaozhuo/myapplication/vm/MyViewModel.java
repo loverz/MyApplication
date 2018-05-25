@@ -4,7 +4,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import  android.arch.lifecycle.ViewModel;
 
+import com.example.luoxiaozhuo.myapplication.bean.User;
 import com.example.luoxiaozhuo.myapplication.bean.UserBean;
+import com.example.luoxiaozhuo.myapplication.repository.UserRepository;
 import com.kelin.mvvmlight.command.ReplyCommand;
 
 public class MyViewModel extends ViewModel {
@@ -29,4 +31,14 @@ public class MyViewModel extends ViewModel {
         user.setValue(new UserBean(name,id));
     }
 
+
+    private LiveData<User> users;
+    public LiveData<User> getUserByName(String username){
+        if(users == null) {
+            // 从Repository中获取数据
+            users = UserRepository.getInstance().getUser(username);
+        }
+        return users;
+
+    }
 }

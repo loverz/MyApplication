@@ -5,10 +5,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.luoxiaozhuo.myapplication.R;
 import com.example.luoxiaozhuo.myapplication.bean.UserBean;
@@ -24,6 +26,8 @@ public class MainFragment extends Fragment {
 
 
     Button mBtn;
+    TextView mTxt;
+
 
 
     OnValueChangeListener onValueChangeBtnOberser ;
@@ -50,6 +54,7 @@ public class MainFragment extends Fragment {
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
         mData = new MyLiveViewData();
         mBtn = getActivity().findViewById(R.id.button);
+        mTxt = getActivity().findViewById(R.id.txt_name);
         onValueChangeBtnOberser = value -> {
 
         };
@@ -63,6 +68,12 @@ public class MainFragment extends Fragment {
 
         mBtn.setOnClickListener(((view) -> {
             myViewModel.setUser("test2222",1);
+        }));
+
+        myViewModel.getUserByName("ittianyu").observe(this,(user -> {
+
+            Log.e("test",user.getName());
+            mTxt.setText(user.getName());
         }));
 
     }
