@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.luoxiaozhuo.myapplication.fg.MainFragment;
+import com.example.luoxiaozhuo.myapplication.mvvm.db.ProjectDBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // init database
+//        ProjectDBHelper.getInstance().init(this);
     }
 
 }

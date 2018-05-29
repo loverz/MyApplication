@@ -1,13 +1,7 @@
-package com.example.luoxiaozhuo.myapplication.bean;
+package com.example.luoxiaozhuo.myapplication.mvvm.bean;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-import java.io.Serializable;
-@Entity(tableName = "user")
-public class User implements Serializable {
+public class ProjectOwner {
     private String login;
-    @PrimaryKey
     private int id;
     private String avatar_url;
     private String gravatar_id;
@@ -24,19 +18,6 @@ public class User implements Serializable {
     private String received_events_url;
     private String type;
     private boolean site_admin;
-    private String name;
-//    private String company;
-    private String blog;
-//    private Object locationion;
-//    private Object email;
-    private boolean hireable;
-//    private Object bio;
-    private int public_repos;
-    private int public_gists;
-    private int followers;
-    private int following;
-    private String created_at;
-    private String updated_at;
 
     public void setLogin(String login) {
         this.login = login;
@@ -106,58 +87,6 @@ public class User implements Serializable {
         this.site_admin = site_admin;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-//    public void setCompany(Object company) {
-//        this.company = company;
-//    }
-
-    public void setBlog(String blog) {
-        this.blog = blog;
-    }
-
-//    public void setLocation(Object location) {
-//        this.location = location;
-//    }
-//
-//    public void setEmail(Object email) {
-//        this.email = email;
-//    }
-
-    public void setHireable(boolean hireable) {
-        this.hireable = hireable;
-    }
-
-//    public void setBio(Object bio) {
-//        this.bio = bio;
-//    }
-
-    public void setPublic_repos(int public_repos) {
-        this.public_repos = public_repos;
-    }
-
-    public void setPublic_gists(int public_gists) {
-        this.public_gists = public_gists;
-    }
-
-    public void setFollowers(int followers) {
-        this.followers = followers;
-    }
-
-    public void setFollowing(int following) {
-        this.following = following;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -224,57 +153,5 @@ public class User implements Serializable {
 
     public boolean isSite_admin() {
         return site_admin;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-//    public Object getCompany() {
-//        return company;
-//    }
-
-    public String getBlog() {
-        return blog;
-    }
-
-//    public Object getLocation() {
-//        return location;
-//    }
-//
-//    public Object getEmail() {
-//        return email;
-//    }
-
-    public boolean isHireable() {
-        return hireable;
-    }
-
-//    public Object getBio() {
-//        return bio;
-//    }
-
-    public int getPublic_repos() {
-        return public_repos;
-    }
-
-    public int getPublic_gists() {
-        return public_gists;
-    }
-
-    public int getFollowers() {
-        return followers;
-    }
-
-    public int getFollowing() {
-        return following;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public String getUpdated_at() {
-        return updated_at;
     }
 }

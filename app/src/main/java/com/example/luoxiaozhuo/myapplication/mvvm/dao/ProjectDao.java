@@ -1,4 +1,4 @@
-package com.example.luoxiaozhuo.myapplication.dao;
+package com.example.luoxiaozhuo.myapplication.mvvm.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -6,13 +6,14 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.example.luoxiaozhuo.myapplication.bean.User;
+import com.example.luoxiaozhuo.myapplication.mvvm.bean.Projects;
 
 @Dao
-public interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long add(User user);
 
-    @Query("select * from user where login = :name")
-    LiveData<User> queryByName(String name);
+public interface ProjectDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Long add(Projects projects);
+
+    @Query("select * from projects where page=:page")
+    LiveData<Projects> queryProjects(int page);
 }
