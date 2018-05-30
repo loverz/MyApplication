@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.luoxiaozhuo.myapplication.fg.MainFragment;
+import com.example.luoxiaozhuo.myapplication.fg.MyStartFragment;
 import com.example.luoxiaozhuo.myapplication.mvvm.db.ProjectDBHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications + " hello world! test for git") ;
+                    mTextMessage.setVisibility(View.GONE);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, MyStartFragment.newInstance())
+                            .commitNow();
                     return true;
             }
             return false;

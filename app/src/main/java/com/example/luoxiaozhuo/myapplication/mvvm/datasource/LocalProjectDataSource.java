@@ -2,8 +2,6 @@ package com.example.luoxiaozhuo.myapplication.mvvm.datasource;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
 
 import com.example.luoxiaozhuo.myapplication.mvvm.bean.Lcee;
 import com.example.luoxiaozhuo.myapplication.mvvm.bean.Projects;
@@ -31,7 +29,7 @@ public class LocalProjectDataSource implements ProjectDataSource {
     @Override
     public LiveData<Lcee<Projects>> queryProjects(int page) {
         final MediatorLiveData<Lcee<Projects>> data = new MediatorLiveData<>();
-        data.setValue(Lcee.<Projects>loading());
+        data.setValue(Lcee.loading());
 
         data.addSource(service.queryProjects(page), (projects) -> {
 

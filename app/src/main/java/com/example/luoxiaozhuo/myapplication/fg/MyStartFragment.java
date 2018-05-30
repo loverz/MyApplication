@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.luoxiaozhuo.myapplication.R;
 import com.example.luoxiaozhuo.myapplication.mvvm.adapter.ProjectsAdapter;
@@ -20,8 +22,8 @@ import com.example.luoxiaozhuo.myapplication.mvvm.db.ProjectDBHelper;
 import com.example.luoxiaozhuo.myapplication.mvvm.repository.ProjectRepository;
 import com.example.luoxiaozhuo.myapplication.mvvm.vm.ProjectViewModel;
 
-import static com.example.luoxiaozhuo.myapplication.fg.MyStartFragment.ListStatus.LoadingMore;
-import static com.example.luoxiaozhuo.myapplication.fg.MyStartFragment.ListStatus.Refreshing;
+import java.util.List;
+
 
 public class MyStartFragment extends Fragment {
 
@@ -53,7 +55,7 @@ public class MyStartFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.mystart,container,false);
 
 
         return view;
@@ -62,6 +64,7 @@ public class MyStartFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e("test","onActivityCreated----");
         initData();
         vContent = getActivity().findViewById(R.id.v_content);
         vError = getActivity().findViewById(R.id.v_error);
@@ -85,9 +88,10 @@ public class MyStartFragment extends Fragment {
     private void initData() {
         ProjectDBHelper.getInstance().init(getActivity());
         ProjectRepository.getInstance().init(getActivity());
-
+        listStatus = ListStatus.Content;
         vm = ViewModelProviders.of(this).get(ProjectViewModel.class);
         vm.getProjects().observe(this, (data) -> {
+//            listStatus = ListStatus.Content;
             updateView(data);
         });
         reload();
@@ -130,6 +134,7 @@ public class MyStartFragment extends Fragment {
                 srl.setRefreshing(false);
                 return;
             }
+            listStatus = ListStatus.Refreshing;
             reload();
         });
 
@@ -150,22 +155,13 @@ public class MyStartFragment extends Fragment {
 
                     if (isLoading())
                         return;
+                    listStatus = ListStatus.LoadingMore;
                     loadMore();
                 }
             }
         });
     }
 
-    /**
-     * current state is loading will return true
-     * otherwise return false
-     *
-     * @return
-     */
-    private boolean isLoading() {
-
-        return false;
-    }
 
     /**
      * reload the data
@@ -201,6 +197,42 @@ public class MyStartFragment extends Fragment {
         }
     }
 
+    private void updateLoadingView() {
+        switch (listStatus) {
+            case LoadingMore: {
+                // todo show loading more view in list footer
+
+                break;
+            }
+            case Refreshing: {
+
+                break;
+            }
+            default: {
+                showLoading();
+                break;
+            }
+        }
+    }
+    private void updateErrorView() {
+        switch (listStatus) {
+            case LoadingMore: {
+                // todo load more error
+
+                break;
+            }
+            case Refreshing: {
+                srl.setRefreshing(false);
+                Toast.makeText(this.getActivity(), "Refresh failed", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            default: {
+                showError();
+                break;
+            }
+        }
+    }
+    ListStatus listStatus = ListStatus.Content;
     private void updateEmptyView() {
         switch (listStatus) {
             case LoadingMore: {
@@ -224,5 +256,37 @@ public class MyStartFragment extends Fragment {
         Refreshing,
         LoadingMore,
         Content,
+    }
+
+    private void showContent() {
+        vContent.setVisibility(View.VISIBLE);
+        vEmpty.setVisibility(View.GONE);
+        vError.setVisibility(View.GONE);
+        vLoading.setVisibility(View.GONE);
+    }
+
+    private void showEmpty() {
+        vContent.setVisibility(View.GONE);
+        vEmpty.setVisibility(View.VISIBLE);
+        vError.setVisibility(View.GONE);
+        vLoading.setVisibility(View.GONE);
+    }
+
+    private void showError() {
+        vContent.setVisibility(View.GONE);
+        vEmpty.setVisibility(View.GONE);
+        vError.setVisibility(View.VISIBLE);
+        vLoading.setVisibility(View.GONE);
+    }
+
+    private void showLoading() {
+        vContent.setVisibility(View.GONE);
+        vEmpty.setVisibility(View.GONE);
+        vError.setVisibility(View.GONE);
+        vLoading.setVisibility(View.VISIBLE);
+    }
+
+    private boolean isLoading() {
+        return status == Status.Loading;
     }
 }

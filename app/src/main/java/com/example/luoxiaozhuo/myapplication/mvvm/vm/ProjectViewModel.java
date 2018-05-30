@@ -20,12 +20,13 @@ public class ProjectViewModel extends ViewModel {
     public LiveData<Lcee<Projects>> getProjects() {
         if (null == ldProjects) {
             ldPage = new MutableLiveData<>();
-            ldProjects = Transformations.switchMap(ldPage, new Function<Integer, LiveData<Lcee<Projects>>>() {
-                @Override
-                public LiveData<Lcee<Projects>> apply(Integer page) {
-                    return projectRepository.getProjects(page);
-                }
-            });
+//            ldProjects = Transformations.switchMap(ldPage, new Function<Integer, LiveData<Lcee<Projects>>>() {
+//                @Override
+//                public LiveData<Lcee<Projects>> apply(Integer page) {
+//                    return projectRepository.getProjects(page);
+//                }
+//            });
+            ldProjects = Transformations.switchMap(ldPage,(page)-> projectRepository.getProjects(page));
         }
         return ldProjects;
     }
