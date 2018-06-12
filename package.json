@@ -1,0 +1,26 @@
+{
+  "name": "rn_test",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://loverz@github.com/loverz/MyApplication.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "lxz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loverz/MyApplication/issues"
+  },
+  "homepage": "https://github.com/loverz/MyApplication#readme",
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-native": "^0.55.4"
+  }
+}
