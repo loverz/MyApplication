@@ -1,7 +1,6 @@
 package com.example.luoxiaozhuo.myapplication;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -24,7 +23,7 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
         mRNRootView = new ReactRootView(this);
         mRNInstanceMgr = ReactInstanceManager.builder().setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle")
-                .setJSMainModuleName("index.android")
+                .setJSMainModuleName("index")
                 .addPackage(new MainReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
@@ -34,8 +33,38 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
 
     }
 
+
     @Override
     public void invokeDefaultOnBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mRNInstanceMgr != null) {
+            mRNInstanceMgr.onPause();
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mRNInstanceMgr != null) {
+            mRNInstanceMgr.onResume(this,this);
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mRNInstanceMgr != null) {
+            mRNInstanceMgr.onDestroy();
+        }
     }
 }

@@ -8,20 +8,20 @@ import java.util.List;
  *
  */
 public class MyLiveViewData<T> {
-    List<OnValueChangeListener<T>> obs = new ArrayList<>();
-
-    public void observer(OnValueChangeListener<T> observer){
-        obs.add(observer);
-    }
-
-    public void unObserver(OnValueChangeListener<T> observer){
-        obs.remove(observer);
-    }
+//    List<OnValueChangeListener<T>> obs = new ArrayList<>();
+//
+//    public void observer(OnValueChangeListener<T> observer){
+//        obs.add(observer);
+//    }
+//
+//    public void unObserver(OnValueChangeListener<T> observer){
+//        obs.remove(observer);
+//    }
 
     public void setValue(T value){
-        for (OnValueChangeListener listener :
-                obs) {
-            listener.valueChange(value);
-        }
+//        for (OnValueChangeListener listener :
+//                obs) {
+//            listener.valueChange(value);
+//        }
     }
 }

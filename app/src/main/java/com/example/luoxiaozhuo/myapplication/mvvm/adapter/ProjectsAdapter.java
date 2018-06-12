@@ -71,8 +71,8 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
         public ProjectViewHolder(View itemView) {
             super(itemView);
 
-            tvName = itemView.findViewById(R.id.tv_name);
-            tvStar = itemView.findViewById(R.id.tv_star);
+//            tvName = itemView.findViewById(R.id.tv_name);
+//            tvStar = itemView.findViewById(R.id.tv_star);
         }
     }
 }
