@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.facebook.react.LifecycleState;
+//import com.facebook.react.LifecycleState;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
+import com.facebook.react.common.LifecycleState;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -22,14 +23,15 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
 
         mRNRootView = new ReactRootView(this);
         mRNInstanceMgr = ReactInstanceManager.builder().setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")
-                .setJSMainModuleName("index")
+                .setBundleAssetName("index.android.bundle").setJSMainModulePath("index")
                 .addPackage(new MainReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
         mRNRootView.startReactApplication(mRNInstanceMgr, "rn_test", null);
+
+        setContentView(mRNRootView);
 
     }
 
@@ -44,7 +46,7 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
         super.onPause();
 
         if (mRNInstanceMgr != null) {
-            mRNInstanceMgr.onPause();
+            mRNInstanceMgr.onHostPause(this);
 
         }
     }
@@ -54,7 +56,7 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
         super.onResume();
 
         if (mRNInstanceMgr != null) {
-            mRNInstanceMgr.onResume(this,this);
+            mRNInstanceMgr.onHostResume(this,this);
 
         }
     }
@@ -64,7 +66,7 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
         super.onDestroy();
 
         if (mRNInstanceMgr != null) {
-            mRNInstanceMgr.onDestroy();
+            mRNInstanceMgr.onHostDestroy(this);
         }
     }
 }
