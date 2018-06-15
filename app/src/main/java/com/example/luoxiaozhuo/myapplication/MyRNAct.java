@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 //import com.facebook.react.LifecycleState;
+import com.example.luoxiaozhuo.myapplication.rn.MyReactPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
@@ -24,7 +25,7 @@ public class MyRNAct extends AppCompatActivity implements DefaultHardwareBackBtn
         mRNRootView = new ReactRootView(this);
         mRNInstanceMgr = ReactInstanceManager.builder().setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle").setJSMainModulePath("index")
-                .addPackage(new MainReactPackage())
+                .addPackage(new MainReactPackage()).addPackage(new MyReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
