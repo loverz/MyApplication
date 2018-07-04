@@ -51,6 +51,8 @@ read从fd中读取数据，然后返回数据长度，如果返回0，则表示�
 每次调用只是将这个引用计数-1.
 
 ### 三次握手
+![Image text](../pic/socket_three_hands_connect.png)
+
 * 客户端向服务器发送一个SYN J
 * 服务器向客户端响应一个SYN K，并且对SYN J 进行确认 ACK J+1
 * 客户端再向服务器发一个确认ACK K+1
