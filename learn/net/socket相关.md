@@ -21,7 +21,6 @@ int bind(int sockfd,sockaddr * addr,socklen_t addrlen);
     网络字节序和主机字节序
         这里提到有大端和小端模式，网络字节序都是大端，所以在进行socket操作之前，需要先将主机字节序转为网络字节序。
       a) Little-Endian就是低位字节排放在内存的低地址端，高位字节排放在内存的高地址端。
-
       b) Big-Endian就是高位字节排放在内存的低地址端，低位字节排放在内存的高地址端。
 
 ##### listen(),connect()函数
