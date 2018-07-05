@@ -64,9 +64,51 @@ read从fd中读取数据，然后返回数据长度，如果返回0，则表示�
 队列中。如果全连接队列满了，会根据设置的值进行处理，是直接返回错误，还是执行重试（过一段时间才会再次发ack给client）。
 ### 3.demo实例
 <code>
-//客户端代码
-
+      // 服务端代码
+    
     #include<stdio.h>
-    #include
+    #include<string.h>
+    #include<netinet/in.h>
+    #include<sys/types.h>
+    #include<sys/socket.h>
+    
+    #define MAXLINE 4096
+    int main(int argc, char** argv) {
+        int listenfd,connfd;
+        struct sockaddr_in seraddr;
+        char buff[4096];
+        int n;
+        if((listenfd = socket(AF_INET,SOCK_STREAM,0)) == -1){
+            printf("create socket error!");
+            exit(0);
+        }
+        memset(&servaddr,0,sizeof(servaddr));
+        servaddr.sin_family = AF_INET;
+        servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+        servaddr.sin_port = htons(6666);
+        //绑定端口
+        
+        if(bind(listenfd, (struct sockaddr*) &servaddr,sizeof(servaddr))== -1){
+            printf("bind socket error: %s code: %d",strerror(errno),errno);
+            exit(0);        
+        }
+        if(listen(listenfd,10) == -1){
+            printf("listen socket error");
+            exit(0);
+        }
+        printf("==================waiting request================");
+        while(1){
+            if((connfd = accept(listenfd,,(struct sockaddr*) NULL,NULL)) == -1){
+                printf("accept error");
+                continue;
+            }
+            n = recv(connfd,buff,MAXLINE,0);
+            buff[0] = '\0';
+            printf(" %s",buff);
+            close(connfd);
+        }
+        close(listenfd);
+    }
+    
 
 </code>
