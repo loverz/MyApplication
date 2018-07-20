@@ -1,0 +1,50 @@
+# flutter 学习记录
+### 入口
+其中 main.dart文件为整个程序的入口
+
+### 外部package引用
+pubspec.yaml文件管理
+
+实例：添加english_words
+
+1. 首先在pubspec.yaml文件中添加english_words和版本号添加到依赖中
+
+
+    dependencies:
+      flutter:
+        sdk: flutter
+      cupertino_icons: ^0.1.0
+      english_words: ^3.1.0
+      
+2. 保存之后AS中会出现安装提示框，安装等待成功
+
+3. 在main.dart文件中的最上面引入，Android studio会有提示。当然，如果你在下面
+没有使用该package，这里在展示上会有些许不同。
+
+4. 对main.dart内容做一定修改，增加内容如下
+
+
+    import 'package:flutter/material.dart';
+    import 'package:english_words/english_words.dart';
+    
+    void main() => runApp(new MyApp());
+    
+    class MyApp extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        final wordPair = new WordPair.random();  // 新增
+        return new MaterialApp(
+          title: 'Welcome to Flutter',
+          home: new Scaffold(
+            appBar: new AppBar(
+              title: new Text('Welcome to Flutter'),
+            ),
+            body: new Center(
+    //          child: new Text('Hello World'),
+              child: new Text(wordPair.asPascalCase),  // 新增
+            ),
+          ),
+        );
+      }
+    }
+    

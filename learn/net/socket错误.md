@@ -10,6 +10,8 @@
 socket关闭，但是socket号未被置成-1.继续在这个socket上进行recv，send就会出这个错误。这个错误会引起SIGPIPE信号
 出现这个信号，系统会将这个EPIPE错误的进程杀掉。所以我们需要屏蔽这个信号，避免socket进程被杀。
 
+* E
+
 <pre>
 Socket error 0 – Directly send error 
 Socket error 10004 – Interrupted function //call 操作被终止 
