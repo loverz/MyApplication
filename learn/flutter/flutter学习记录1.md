@@ -48,3 +48,42 @@ pubspec.yaml文件管理
       }
     }
     
+    
+    
+### assert
+注意缩进，需要添加图片资源的相对路径
+
+      # To add assets to your application, add an assets section, like this:
+      # assets:
+      #  - images/a_dot_burr.jpeg
+      #  - images/a_dot_ham.jpeg
+
+### layout 相关
+
+flutter中layout核心就是widget。
+常用widget：
+
+* Container 
+
+      Container({
+        Key key,
+        this.alignment,
+        this.padding,
+        Color color,
+        Decoration decoration,
+        this.foregroundDecoration,
+        double width,
+        double height,
+        BoxConstraints constraints,
+        this.margin,
+        this.transform,
+      })
+    
+* Row
+横向容器
+* Column
+纵向容器
+
+
+ 
+
