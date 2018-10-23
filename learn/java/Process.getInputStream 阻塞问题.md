@@ -28,3 +28,4 @@ Process.getInputStream() getErrorStream()分别返回的是Process标准输出�
 通过启动两个线程来并发的读取和处理输出流和错误流
 
 方案2：用ProcessBuilder的redirectErrorStream()方法合并输出流和错误流。
+
