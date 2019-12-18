@@ -14,8 +14,8 @@ pubspec.yaml文件管理
       flutter:
         sdk: flutter
       cupertino_icons: ^0.1.0
-      english_words: ^3.1.0
-      
+      english_words: ^3.1.0 // 当前版本接口保持兼容的最新版本
+
 2. 保存之后AS中会出现安装提示框，安装等待成功
 
 3. 在main.dart文件中的最上面引入，Android studio会有提示。当然，如果你在下面
@@ -47,11 +47,14 @@ pubspec.yaml文件管理
         );
       }
     }
-    
-    
-    
+
+
+​    
+​    
 ### assert
 注意缩进，需要添加图片资源的相对路径
+
+可以使用 flutter-img-sync插件来自动添加图片资源索引；
 
       # To add assets to your application, add an assets section, like this:
       # assets:
@@ -65,20 +68,22 @@ flutter中layout核心就是widget。
 
 * Container 
 
-      Container({
-        Key key,
-        this.alignment,
-        this.padding,
-        Color color,
-        Decoration decoration,
-        this.foregroundDecoration,
-        double width,
-        double height,
-        BoxConstraints constraints,
-        this.margin,
-        this.transform,
-      })
-    
+  ```dart
+  Container({
+    Key key,
+    this.alignment,
+    this.padding,
+    Color color,
+    Decoration decoration,
+    this.foregroundDecoration,
+    double width,
+    double height,
+    BoxConstraints constraints,
+    this.margin,
+    this.transform,
+  })
+  ```
+
 * Row
 横向容器
 * Column
@@ -130,6 +135,8 @@ flutter中layout核心就是widget。
         );
       }
     }
-   
+
  
+
+
 
